@@ -9,7 +9,7 @@ import Footer from './components/Footer.vue'
     <Header />
   </header>
 
-  <main>
+  <main class="Agenda_Style">
     <FullCalendar />
   </main>
   <footer>
@@ -18,5 +18,11 @@ import Footer from './components/Footer.vue'
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
 @import './assets/base.css';
+
+.Agenda_Style {
+  padding: 20px;
+}
+
 </style>
