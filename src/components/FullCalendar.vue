@@ -3,6 +3,7 @@ import '@fullcalendar/core/vdom' // Selon la doc c'est important de l'importer e
 import FullCalendar from '@fullcalendar/vue3'
 import frLocale from '@fullcalendar/core/locales/fr'
 import dayGridPlugin from '@fullcalendar/daygrid' // sont des vues préconfigurées pour le calendrier
+import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction' //Requis pour détecter les actions dateClick, les actions sélectionnables et les événements glisser-déposer et redimensionner.
 import listPlugin from '@fullcalendar/list' //permet d'important la liste de récupération des évènements (bouton : Planning)
 
@@ -13,20 +14,23 @@ export default {
   data() {
     return {
       calendarOptions: {
-        plugins: [dayGridPlugin, interactionPlugin, listPlugin], //On importe les plugins ici, sinon ça ne marche pas !
-        initialView: 'dayGridMonth', //affichage initial du calendrier
+        plugins: [dayGridPlugin, interactionPlugin, listPlugin,timeGridPlugin], //On importe les plugins ici, sinon ça ne marche pas !
+        initialView: 'timeGridWeek', //affichage initial du calendrier
         locale: frLocale,
         headerToolbar: { //modifie le header du calendrier
           left: 'prev next today',
           center: 'title',
-          right: 'dayGridMonth,dayGridWeek,dayGridDay,listWeek',
+          right: 'dayGridMonth,timeGridWeek,dayGridDay,listWeek',
         },
+        firstDay: 1, // débute la semaine le lundi
         weekends: true, // si false -> n'affiche pas les weekends
         weekNumbers: true, //ajoute les numéros des semaines
         editable: true, //permet l'edition des évenements (drag/ drop / resize)
         selectable: true, //Permet à un utilisateur de mettre en surbrillance plusieurs jours ou plages horaires en cliquant et en faisant glisser.
-        dateClick: function (info) { 
-          alert('Clicked on: ' + info.dateStr)
+        nowIndicator: true, //barre d'indication qui indique où nous sommes dans le calendrier
+
+        dateClick: function (info) {
+          /*alert('Clicked on: ' + info.dateStr)
           /*
           alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY)
           alert('Current view: ' + info.view.type)
